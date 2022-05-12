@@ -12,6 +12,15 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		setRootNode(new BinaryNode<T>(rootEntry));
 	}
 
+	/** Description for add() method
+	 * Adds a new entry to this tree, if it does not match an existing object in the
+	 * tree. Otherwise, replaces the existing object with the new entry.
+	 * 
+	 * @param anEntry An object to be added to the tree.
+	 * @return Either null if anEntry was not in the tree but has been added, or the
+	 *         existing entry that matched the parameter anEntry and has been
+	 *         replaced in the tree.
+	 */
 	@Override
 	public T add(T newEntry) {
 		T result = null;
@@ -24,24 +33,76 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 
 	// THIS METHOD CANNOT BE RECURSIVE.
 	private T addEntryHelperNonRecursive(T newEntry) {
-		// YOUR CODE HERE! 
+		T result = null;
+		int comparison = 0;
+		BinaryNode<T> newNode = new BinaryNode<>(newEntry); // create new leaf
+		BinaryNode<T> rootNode = this.getRootNode(); // set rootNode(aka "currentNode") to rootNode
 		
-		return null; // placeholder: replace with your own code
+		// transversing the BST
+		while (rootNode != null) {
+			comparison = newNode.getData().compareTo(rootNode.getData()); // 1. Compare the new element to the current element.
+			
+			if (comparison < 0) { // 2. If the new element is smaller, go into the left subtree. Return to step 1.
+				if (rootNode.hasLeftChild()) { // this logic ensures rootNode stops at leaf 
+					rootNode = rootNode.getLeftChild();;
+				} else {
+					break;
+				}
+			} else if (comparison > 0) { // 3. If the new element is larger, go into the right subtree. Return to step 1.
+				if (rootNode.hasRightChild()) { // this logic ensures rootNode stops at leaf 
+					rootNode = rootNode.getRightChild();;
+				} else {
+					break;
+				}
+			} else if (comparison == 0) { // 4. If the new element is equal, go into the left subtree. Return to step 1.
+				result = newEntry; // returns the data value if repeated (optional)
+				if (rootNode.hasLeftChild()) { // this logic ensures rootNode stops at leaf 
+					rootNode = rootNode.getLeftChild();;
+				} else {
+					break;
+				}
+			}
+		} // end of outer while loop this loop breaks when rootNode == null	
+		
+		// appending the new leaf
+		if (comparison <= 0) { // If the new element is smaller or equal, go into the left subtree
+			rootNode.setLeftChild(newNode);
+		} else { // If the new element is larger, go into the right subtree
+			rootNode.setRightChild(newNode);
+		}
+		return result;
 	}
 
-	
 	// THIS METHOD CANNOT BE RECURSIVE.
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countEntriesNonRecursive(T target) {
-		// YOUR CODE HERE! 
-		
-		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
+		Stack<BinaryNode<T>> nodeStack = new Stack<>();
 		BinaryNode<T> currentNode = getRootNode();
 
-		// consider a loop!
-	
-		return count; 
+		// empty: return 0
+		if (this.getRootNode() == null) {
+			return count;
+		}
+
+		// loop using a post-order transversal of the BST
+		while (!nodeStack.isEmpty() || currentNode != null) {
+
+			while (currentNode != null) {
+				nodeStack.push(currentNode);
+				currentNode = currentNode.getLeftChild();
+			}
+
+			if (!nodeStack.isEmpty()) {
+				BinaryNode<T> nextNode = nodeStack.pop();
+
+				if (nextNode.getData().equals(target)) {
+					count++;
+				}
+				currentNode = nextNode.getRightChild();
+			}
+		} // end of outer while loop
+		return count;
 	}
 	
 	
@@ -49,14 +110,28 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// You are allowed to create a private helper.
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countGreaterRecursive(T target) {
-		// YOUR CODE HERE! 
-		
-		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
 		BinaryNode<T> rootNode = getRootNode();
-			
-		// consider a helper method!
-			
+		
+		// empty: return 0
+		if (this.getRootNode() == null) {
+			return count;
+		} else { // not empty call recursive method
+			return count = inorderTraverse(rootNode, target);
+		}
+	}
+	
+	private int inorderTraverse(BinaryNode<T> node, T target) { // this private method is used by countGreaterRecursive
+		int count = 0;
+
+		if (node != null) {
+			count += inorderTraverse(node.getLeftChild(), target);
+
+			if (node.getData().compareTo(target) > 0) {
+				count += 1;
+			}
+			count += inorderTraverse(node.getRightChild(), target);
+		}
 		return count;
 	}
 		
@@ -65,16 +140,32 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// Hint: use a stack!
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countGreaterIterative(T target) {
-		// YOUR CODE HERE! 
-		
-		// this initial code is meant as a suggestion to get your started- use it or delete it!
 		int count = 0;
-		BinaryNode<T> rootNode = getRootNode();
-		Stack<BinaryNode<T>> nodeStack = new Stack<BinaryNode<T>>();
-		nodeStack.push(rootNode);
+		Stack<BinaryNode<T>> nodeStack = new Stack<>();
+		BinaryNode<T> currentNode = getRootNode();
 
-		// consider a loop based on the stack!
+		// empty
+		if (this.getRootNode() == null) {
+			return count;
+		}
 
+		// loop using a post-order transversal of the BST
+		while (!nodeStack.isEmpty() || currentNode != null) {
+
+			while (currentNode != null) {
+				nodeStack.push(currentNode);
+				currentNode = currentNode.getLeftChild();
+			}
+
+			if (!nodeStack.isEmpty()) {
+				BinaryNode<T> nextNode = nodeStack.pop();
+
+				if (nextNode.getData().compareTo(target) > 0) {
+					count++;
+				}
+				currentNode = nextNode.getRightChild();
+			}
+		} // end of outer while loop
 		return count;
 	}
 		

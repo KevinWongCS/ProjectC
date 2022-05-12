@@ -16,7 +16,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	 * Adds a new entry to this tree, if it does not match an existing object in the
 	 * tree. Otherwise, replaces the existing object with the new entry.
 	 * 
-	 * @param anEntry An object to be added to the tree.
+	 * @param newEntry An object to be added to the tree.
 	 * @return Either null if anEntry was not in the tree but has been added, or the
 	 *         existing entry that matched the parameter anEntry and has been
 	 *         replaced in the tree.
@@ -175,8 +175,23 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// The method can be iterative or recursive.
 	// If you make the method recursive, you might need to comment out the call to the method in Part B.
 	public int countUniqueValues() {
-		// YOUR EXTRA CREDIT CODE HERE! 
-		return 0; // placeholder: replace with your own code
+		BinaryNode<T> currentNode = this.getRootNode();
+		return this.countUniqueHelper(currentNode, (Comparable)null);
+	}
+
+	private int countUniqueHelper(BinaryNode<T> currentNode, Comparable prevTarget) {
+		int count = 0;
+		if (currentNode != null) {
+			if (((Comparable)currentNode.getData()).equals(prevTarget)) {
+				--count;
+			}
+
+			count += this.countUniqueHelper(currentNode.getLeftChild(), (Comparable)currentNode.getData());
+			++count;
+			count += this.countUniqueHelper(currentNode.getRightChild(), prevTarget);
+		}
+
+		return count;
 	}
 		
 	

@@ -85,7 +85,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 			return count;
 		}
 
-		// loop using a post-order transversal of the BST
+		// loop using a in-order transversal of the BST
 		while (!nodeStack.isEmpty() || currentNode != null) {
 
 			while (currentNode != null) {

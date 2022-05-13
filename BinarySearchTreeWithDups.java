@@ -72,10 +72,13 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		}
 		return result;
 	}
-
 	// THIS METHOD CANNOT BE RECURSIVE.
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countEntriesNonRecursive(T target) {
+		
+		// EFFICIENCY VARIABLE
+		int loopTimes=0;
+		
 		int count = 0;
 		Stack<BinaryNode<T>> nodeStack = new Stack<>();
 		BinaryNode<T> currentNode = getRootNode();
@@ -85,9 +88,17 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 			return count;
 		}
 
-		// loop using a in-order transversal of the BST
+		// loop using a in-order traversal of the BST
 		while (!nodeStack.isEmpty() || currentNode != null) {
-
+			
+			// EFFICIENCY VARIABLE
+			loopTimes++;
+			
+			// This one conditional takes advantage of order in BST
+			while (currentNode!= null && target.compareTo(currentNode.getData()) > 0) {
+				currentNode = currentNode.getRightChild();
+			}
+			
 			while (currentNode != null) {
 				nodeStack.push(currentNode);
 				currentNode = currentNode.getLeftChild();
@@ -102,6 +113,10 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 				currentNode = nextNode.getRightChild();
 			}
 		} // end of outer while loop
+		
+		// EFFICIENCY VARIABLE
+//		System.out.println(loopTimes);
+		
 		return count;
 	}
 	
@@ -110,6 +125,10 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// You are allowed to create a private helper.
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countGreaterRecursive(T target) {
+		
+		// EFFICIENCY VARIABLE
+		recursionTimes = 0;
+		
 		int count = 0;
 		BinaryNode<T> rootNode = getRootNode();
 		
@@ -117,19 +136,31 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		if (this.getRootNode() == null) {
 			return count;
 		} else { // not empty call recursive method
-			return count = inorderTraverse(rootNode, target);
+			count = inorderTraverse(rootNode, target);
 		}
+		
+		// EFFICIENCY VARIABLE
+//		System.out.println(recursionTimes);
+		
+		return count;
 	}
 	
 	private int inorderTraverse(BinaryNode<T> node, T target) { // this private method is used by countGreaterRecursive
+		
+		// EFFICIENCY VARIABLE
+		recursionTimes++;
+		
 		int count = 0;
 
 		if (node != null) {
-			count += inorderTraverse(node.getLeftChild(), target);
-
+			if (target.compareTo(node.getData()) < 0) {
+				count += inorderTraverse(node.getLeftChild(), target);
+			} 
+			
 			if (node.getData().compareTo(target) > 0) {
 				count += 1;
 			}
+			
 			count += inorderTraverse(node.getRightChild(), target);
 		}
 		return count;
@@ -140,6 +171,10 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 	// Hint: use a stack!
 	// Make sure to take advantage of the sorted nature of the BST!
 	public int countGreaterIterative(T target) {
+		
+		// EFFICIENCY VARIABLE
+		int loopTimes=0;
+		
 		int count = 0;
 		Stack<BinaryNode<T>> nodeStack = new Stack<>();
 		BinaryNode<T> currentNode = getRootNode();
@@ -149,9 +184,17 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 			return count;
 		}
 
-		// loop using a post-order transversal of the BST
+		// loop using a post-order traversal of the BST
 		while (!nodeStack.isEmpty() || currentNode != null) {
-
+			
+			// EFFICIENCY VARIABLE
+			loopTimes++;
+			
+			// This one conditional takes advantage of order in BST
+			while (currentNode!= null && target.compareTo(currentNode.getData()) > 0) {
+				currentNode = currentNode.getRightChild();
+			}
+			
 			while (currentNode != null) {
 				nodeStack.push(currentNode);
 				currentNode = currentNode.getLeftChild();
@@ -166,6 +209,10 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 				currentNode = nextNode.getRightChild();
 			}
 		} // end of outer while loop
+		
+		// EFFICIENCY VARIABLE
+//		System.out.println(loopTimes);
+		
 		return count;
 	}
 		

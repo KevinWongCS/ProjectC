@@ -3,6 +3,7 @@ import java.util.*;
 public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends BinarySearchTree<T>
 		implements SearchTreeInterface<T>, java.io.Serializable {
 	
+	// EFFICIENCY VARIABLE
 	private static int recursionTimes = 0;
 	
 	public BinarySearchTreeWithDups() {
@@ -117,7 +118,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		} // end of outer while loop
 		
 		// EFFICIENCY VARIABLE
-//		System.out.println(loopTimes);
+		System.out.println(loopTimes);
 		
 		return count;
 	}
@@ -142,7 +143,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		}
 		
 		// EFFICIENCY VARIABLE
-//		System.out.println(recursionTimes);
+		System.out.println(recursionTimes);
 		
 		return count;
 	}
@@ -213,7 +214,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		} // end of outer while loop
 		
 		// EFFICIENCY VARIABLE
-//		System.out.println(loopTimes);
+		System.out.println(loopTimes);
 		
 		return count;
 	}

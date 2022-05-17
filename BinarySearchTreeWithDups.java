@@ -2,7 +2,9 @@ import java.util.*;
 
 public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends BinarySearchTree<T>
 		implements SearchTreeInterface<T>, java.io.Serializable {
-
+	
+	private static int recursionTimes = 0;
+	
 	public BinarySearchTreeWithDups() {
 		super();
 	}

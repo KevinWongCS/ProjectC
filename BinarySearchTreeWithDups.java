@@ -50,7 +50,6 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 			if (comparison < 0) { // 2. If the new element is smaller, go into the left subtree. Return to step 1.
 				if (rootNode.hasLeftChild()) { // this logic ensures rootNode stops at leaf
 					rootNode = rootNode.getLeftChild();
-					;
 				} else {
 					break;
 				}
@@ -58,7 +57,6 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 											// 1.
 				if (rootNode.hasRightChild()) { // this logic ensures rootNode stops at leaf
 					rootNode = rootNode.getRightChild();
-					;
 				} else {
 					break;
 				}
@@ -66,7 +64,6 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 				result = newEntry; // returns the data value if repeated (optional)
 				if (rootNode.hasLeftChild()) { // this logic ensures rootNode stops at leaf
 					rootNode = rootNode.getLeftChild();
-					;
 				} else {
 					break;
 				}

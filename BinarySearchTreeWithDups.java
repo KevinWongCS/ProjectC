@@ -79,7 +79,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		return result;
 	}
 
-	// THIS METHOD CANNOT BE RECURSIVE.
+	// THIS METHOD CANNOT BE RECURSIVE. 
 	// Make sure to take advantage of the sorted nature of the BST!
 	@SuppressWarnings("null")
 	public int countEntriesNonRecursive(T target) {

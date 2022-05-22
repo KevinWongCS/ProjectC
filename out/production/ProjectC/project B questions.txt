@@ -1,0 +1,11 @@
+
+1) The test A tree built from an ascending list was built faster and had faster processing. This is because in the case of the descending list, 
+   every node that's added will be put in the left child's spot, which is more inefficient and defeats the purpose of a bst. 
+
+2) The test C tree was built faster than the test A tree. Going off the printed "tree info", you can see that the tree is much more evenly dispersed in the test C tree. 
+
+3) The tree in test C processed much faster than the list. The tree big-o processing is O(log(n)), and the list is O(n), but I would've guessed
+   that the list is at least O(n^2) by the processing times. 
+
+4) The main characteristic of a binary search tree that affects its efficiency is how evenly the tree is dispersed. As the number of children 
+   in a tree increase on a single side, its efficiency creeps closer to O(n).

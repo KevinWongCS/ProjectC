@@ -121,7 +121,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		} // end of outer while loop
 
 		// EFFICIENCY VARIABLE PRINT
-		System.out.println(loopTimes);
+		//System.out.println(loopTimes);
 
 		return count;
 	}
@@ -145,7 +145,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		}
 
 		// EFFICIENCY VARIABLE PRINT
-		System.out.println(recursionTimes);
+		//System.out.println(recursionTimes);
 
 		return count;
 	}
@@ -215,7 +215,7 @@ public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends B
 		} // end of outer while loop
 
 		// EFFICIENCY VARIABLE PRINT
-		System.out.println(loopTimes);
+		//System.out.println(loopTimes);
 
 		return count;
 	}

@@ -15,3 +15,14 @@
 
 4) The main characteristic of a binary search tree that affects its efficiency is how evenly the tree is dispersed. As the number of children 
    in a tree increase on a single side, its efficiency creeps closer to O(n).
+
+
+
+
+
+
+
+
+
+
+

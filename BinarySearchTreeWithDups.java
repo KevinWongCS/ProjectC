@@ -1,3 +1,9 @@
+/* group names: Matthew Rutherford, Sima Kassianik, Christian Kurt Balais, Kevin Wong
+ * filename: BinarySearchTreeWithDups.java
+ * date: 5/23/2022
+ * desc: Project C: Trees and Big Data Part A
+ */
+
 import java.util.*;
 
 public class BinarySearchTreeWithDups<T extends Comparable<? super T>> extends BinarySearchTree<T>
